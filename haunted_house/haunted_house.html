@@ -1,0 +1,350 @@
+<html>
+	<head>
+		<style>
+			body { margin: 0; }
+			canvas { width: 100%; height: 100% }
+		</style>
+	</head>
+	<body>
+		<script src="three.min.js"></script>
+		<script>
+			var renderer = new THREE.WebGLRenderer();
+			renderer.setSize( window.innerWidth, window.innerHeight );
+            renderer.setAnimationLoop( drawFrame );
+			document.body.appendChild( renderer.domElement );
+
+			var scene = new THREE.Scene();
+			
+			var aspect = window.innerWidth/window.innerHeight;
+			var camera = new THREE.PerspectiveCamera( 30, aspect );
+			camera.position.set( 3, 4, 10 );
+			camera.lookAt( new THREE.Vector3() );
+
+
+            var geometry = new THREE.BoxGeometry(1.8, 3, 1.8);
+			var material = new THREE.MeshPhongMaterial({color:"peachpuff"});
+			var cylinder = new THREE.Mesh( geometry, material );
+			scene.add( cylinder );
+
+            var towergeometry = new THREE.CylinderGeometry( 0.12, 0.12, 0.4,32);
+			var towermaterial = new THREE.MeshPhongMaterial({color:"peachpuff"});
+
+			var tower1 = new THREE.Mesh( towergeometry, towermaterial );
+            tower1.position.set(-0.6,1.6,0.5);
+			scene.add( tower1 );
+
+            var tower3 = new THREE.Mesh( towergeometry, towermaterial );
+            tower3.position.set(0.6,1.6,-0.5);
+			scene.add( tower3 );
+
+            
+
+            var radius = 0.2; 
+            var height = 0.5; 
+            var geometry = new THREE.CylinderGeometry(0, radius, height,32);
+            var material = new THREE.MeshPhongMaterial({ color: "gray" }); 
+            var cone1 = new THREE.Mesh(geometry, material);
+            cone1.position.set(-0.6,2,0.5);
+            scene.add(cone1);
+
+            
+
+            var cone3 = new THREE.Mesh(geometry, material);
+            cone3.position.set(0.6,2,-0.5);
+            scene.add(cone3);
+
+
+            var geometry = new THREE.CylinderGeometry(0, 0.9, 1,32);
+            var material = new THREE.MeshPhongMaterial({ color: "gray" }); 
+            var cone = new THREE.Mesh(geometry, material);
+            cone.position.y=2;
+            scene.add(cone);
+
+            var windowCube=[];
+            var windowGeometry = new THREE.BoxGeometry(0.2, 0.2, 0.1); 
+            for (var y=0;y<=1.2;y+=0.6)
+            for (var i = 0; i < 8; i++) 
+            {
+                var windowMaterial = new THREE.MeshBasicMaterial({ color: 'yellow'});
+                windowCube[i] = new THREE.Mesh(windowGeometry, windowMaterial);
+         
+                var angle = (i / 8) * Math.PI * 2;
+                var x = Math.cos(angle) * 0.84;
+                var z = Math.sin(angle) * 0.84;
+
+                windowCube[i].position.set(x, y, z); 
+                scene.add(windowCube[i]); 
+             
+                var light = new THREE.PointLight('yellow');
+                windowCube[i].add( light );
+            }
+
+        var doorGeometry = new THREE.BoxGeometry(0.4, 1, 0.1); 
+        var doorMaterial = new THREE.MeshPhongMaterial({ color: 'peachpuff' }); 
+        var door = new THREE.Mesh(doorGeometry, doorMaterial);
+        door.position.set(0, -1, 0.87); 
+        cylinder.add(door);
+
+        var geometry = new THREE.BoxGeometry( 20, 1, 20 );
+		var material = new THREE.MeshPhongMaterial();
+        var platform=new THREE.Mesh( geometry, material );
+        platform.position.y=-2.5;
+		scene.add(platform);
+
+        var color='orange';
+        var pumpkingeometry=new THREE.SphereGeometry(0.1);
+        var pumpkinmaterial=new THREE.MeshBasicMaterial({color:color});
+
+        var pumpkin1=new THREE.Mesh(pumpkingeometry,pumpkinmaterial);
+        pumpkin1.position.set(-0.7,-1.5,1);
+        scene.add(pumpkin1);
+
+        var light = new THREE.PointLight(color);
+        pumpkin1.add( light );
+
+        var pumpkin2=new THREE.Mesh(pumpkingeometry,pumpkinmaterial);
+        pumpkin2.position.set(0.7,-1.5,1);
+        scene.add(pumpkin2);
+
+        var light = new THREE.PointLight(color);
+        pumpkin2.add( light );
+
+        var pumpkin3=new THREE.Mesh(pumpkingeometry,pumpkinmaterial);
+        pumpkin3.position.set(-0.9,-1.5,0.8);
+        scene.add(pumpkin3);
+
+        var light = new THREE.PointLight(color);
+        pumpkin3.add( light );
+
+        var pumpkin4=new THREE.Mesh(pumpkingeometry,pumpkinmaterial);
+        pumpkin4.position.set(0.9,-1.5,0.8);
+        scene.add(pumpkin4);
+
+        var light = new THREE.PointLight(color);
+        pumpkin4.add( light );
+
+        var pumpkin5=new THREE.Mesh(pumpkingeometry,pumpkinmaterial);
+        pumpkin5.position.set(-0.75,-1.5,0.7);
+        scene.add(pumpkin5);
+
+        var light = new THREE.PointLight(color);
+        pumpkin5.add( light );
+
+        var pumpkin6=new THREE.Mesh(pumpkingeometry,pumpkinmaterial);
+        pumpkin6.position.set(0.75,-1.5,0.7);
+        scene.add(pumpkin6);
+
+        var light = new THREE.PointLight(color);
+        pumpkin6.add( light );
+
+        //градина
+
+        var geometry = new THREE.BoxGeometry( 10, 0.4, 10 );
+		var material = new THREE.MeshPhongMaterial({color: "rgb(7, 7, 7)"});
+        var garden=new THREE.Mesh( geometry, material );
+        garden.position.set(0,-1.8,0);
+		scene.add(garden);
+
+        // ограда
+        
+        for(var i = 0; i < 34; i++) {
+
+        var geometry = new THREE.BoxGeometry( 0.1, 1, 0.1 );
+		var material = new THREE.MeshPhongMaterial({color: "rgb(3, 3, 3)"});
+        var fence=new THREE.Mesh( geometry, material );
+        fence.position.set(5 - i*0.3,-1.2,5);
+		scene.add(fence);
+
+        var geometry = new THREE.BoxGeometry( 0.1, 1, 0.1 );
+		var material = new THREE.MeshPhongMaterial({color: "rgb(3, 3, 3)"});
+        var fence=new THREE.Mesh( geometry, material );
+        fence.position.set(5,-1.2,5 - i*0.3);
+		scene.add(fence);
+
+        var geometry = new THREE.BoxGeometry( 0.1, 1, 0.1 );
+		var material = new THREE.MeshPhongMaterial({color: "rgb(3, 3, 3)"});
+        var fence=new THREE.Mesh( geometry, material );
+        fence.position.set(-5,-1.2,-5 + i*0.3);
+		scene.add(fence);
+
+        var geometry = new THREE.BoxGeometry( 0.1, 1, 0.1 );
+		var material = new THREE.MeshPhongMaterial({color: "rgb(3, 3, 3)"});
+        var fence=new THREE.Mesh( geometry, material );
+        fence.position.set(-5 + i*0.3,-1.2,-5);
+		scene.add(fence);
+
+        var geometry = new THREE.BoxGeometry( 0.1, 1, 0.1 );
+		var material = new THREE.MeshPhongMaterial({color: "rgb(3, 3, 3)"});
+        var fence=new THREE.Mesh( geometry, material );
+        fence.position.set(5,-1.2,5 - i*0.3);
+		scene.add(fence);
+
+        var geometry = new THREE.BoxGeometry( 0.1, 1, 0.1 );
+		var material = new THREE.MeshPhongMaterial({color: "rgb(3, 3, 3)"});
+        var fence=new THREE.Mesh( geometry, material );
+        fence.position.set(5 - i*0.3,-1.2,5);
+		scene.add(fence);
+       
+
+        }
+
+        var geometry = new THREE.BoxGeometry( 10, 0.2, 0.1 );
+		var material = new THREE.MeshPhongMaterial({color: "rgb(3, 3, 3)"});
+        var fence=new THREE.Mesh( geometry, material );
+        fence.position.set( 0,-0.9,5);
+		scene.add(fence);
+
+        var geometry = new THREE.BoxGeometry( 10, 0.2, 0.1 );
+		var material = new THREE.MeshPhongMaterial({color: "rgb(3, 3, 3)"});
+        var fence=new THREE.Mesh( geometry, material );
+        fence.position.set( 0,-1.3,5);
+		scene.add(fence);
+
+        var geometry = new THREE.BoxGeometry( 10, 0.2, 0.1 );
+		var material = new THREE.MeshPhongMaterial({color: "rgb(3, 3, 3)"});
+        var fence=new THREE.Mesh( geometry, material );
+        fence.position.set( 0,-0.9,-5);
+		scene.add(fence);
+
+        var geometry = new THREE.BoxGeometry( 10, 0.2, 0.1 );
+		var material = new THREE.MeshPhongMaterial({color: "rgb(3, 3, 3)"});
+        var fence=new THREE.Mesh( geometry, material );
+        fence.position.set( 0,-1.3,-5);
+		scene.add(fence);
+
+        var geometry = new THREE.BoxGeometry( 0.1, 0.2, 10 );
+		var material = new THREE.MeshPhongMaterial({color: "rgb(3, 3, 3)"});
+        var fence=new THREE.Mesh( geometry, material );
+        fence.position.set( 5,-0.9,0);
+		scene.add(fence);
+
+        var geometry = new THREE.BoxGeometry( 0.1, 0.2, 10 );
+		var material = new THREE.MeshPhongMaterial({color: "rgb(3, 3, 3)"});
+        var fence=new THREE.Mesh( geometry, material );
+        fence.position.set( 5,-1.3,0);
+		scene.add(fence);
+
+        var geometry = new THREE.BoxGeometry( 0.1, 0.2, 10 );
+		var material = new THREE.MeshPhongMaterial({color: "rgb(3, 3, 3)"});
+        var fence=new THREE.Mesh( geometry, material );
+        fence.position.set( -5,-0.9,0);
+		scene.add(fence);
+
+        var geometry = new THREE.BoxGeometry( 0.1, 0.2, 10 );
+		var material = new THREE.MeshPhongMaterial({color: "rgb(3, 3, 3)"});
+        var fence=new THREE.Mesh( geometry, material );
+        fence.position.set( -5,-1.3,0);
+		scene.add(fence);
+
+        // var geometry = new THREE.BoxGeometry( 0.1, 1, 0.1 );
+		// var material = new THREE.MeshPhongMaterial({color: "rgb(3, 3, 3)"});
+        // var fence=new THREE.Mesh( geometry, material );
+        // fence.position.set(0,-1.2,5);
+		// scene.add(fence);
+
+        //метра
+            //168, 155, 50
+            var group1 = new THREE.Group();
+			scene.add( group1 );
+
+            var handleGeometry = new THREE.CylinderGeometry(0.01, 0.01, 1, 32); 
+            var handleMaterial = new THREE.MeshPhongMaterial({ color: 0x8B4513 });
+            var handle = new THREE.Mesh(handleGeometry, handleMaterial);
+            handle.position.set(-2.5, 1.5, 0); 
+            handle.rotation.z=Math.PI/2;
+            group1.add(handle);
+
+            var broomGeometry = new THREE.ConeGeometry(0.1, 0.5, 32); 
+            var broomMaterial = new THREE.MeshPhongMaterial({ color: 0xFFD700 }); 
+            var broom = new THREE.Mesh(broomGeometry, broomMaterial);
+            broom.position.set(-2, 1.5, 0); 
+            broom.rotation.z=Math.PI/2;
+            group1.add(broom);
+
+
+            var group2 = new THREE.Group();
+			scene.add( group2 );
+
+            var handle2 = new THREE.Mesh(handleGeometry, handleMaterial);
+            handle2.position.set(2.5, 1.5, 0); 
+            handle2.rotation.z=Math.PI/2;
+            group2.add(handle2);
+
+            var broom2 = new THREE.Mesh(broomGeometry, broomMaterial);
+            broom2.position.set(3, 1.5, 0); 
+            broom2.rotation.z=Math.PI/2;
+            group2.add(broom2);
+
+
+            var group3 = new THREE.Group();
+			scene.add( group3 );
+
+
+            var handle3 = new THREE.Mesh(handleGeometry, handleMaterial);
+            handle3.position.set(0.3, 1.5, 3); 
+            handle3.rotation.z=Math.PI/2;
+            group3.add(handle3);
+
+            var broom3 = new THREE.Mesh(broomGeometry, broomMaterial);
+            broom3.position.set(0.8, 1.5, 3); 
+            broom3.rotation.z=Math.PI/2;
+            group3.add(broom3);
+
+        //3 сфери, като призраци които ще обикалят около сградата
+        // var colors = ['red','orange','yellow'];
+			
+		// създаване на сфери 
+		
+			
+		var light = new THREE.PointLight( );
+		light.position.set( 2, 2, 3 );
+		scene.add( light );
+            
+        var light = new THREE.PointLight( );
+		light.position.set( -2, 2, -3 );
+		scene.add( light );
+            
+			var temp=0;
+            function drawFrame()
+            {
+                scene.rotation.y+=0.005;
+
+                temp+=0.005;
+
+                group1.position.x = 5*Math.cos(2.5*temp);
+				group1.position.y = 1.75+1*Math.sin(2.4*temp);//0.875
+				group1.position.z = 5*Math.cos(1.9*temp);
+
+                //group1.rotation.y=0.05;
+
+                group2.position.x = 5*Math.cos(2.1*temp);
+				group2.position.y = 1.75+1*Math.cos(2.5*temp);
+				group2.position.z = 5*Math.sin(2.2*temp);
+
+				group3.position.x = 5*Math.sin(1.8*temp);
+				group3.position.y = 1.75+1*Math.sin(2.6*temp);
+				group3.position.z = 5*Math.cos(2.6*temp);
+                
+                //broom.position.x = 4*Math.cos(2*temp);
+				//broom.position.y = 0.5+1*Math.sin(2*temp);
+				//broom.position.z = 4*Math.cos(1.2*temp);
+
+                ////balls[0].position.x = 4*Math.cos(2*temp);
+				//balls[0].position.y = 0.5+1*Math.sin(2*temp);
+				//balls[0].position.z = 4*Math.cos(1.2*temp);;
+
+				// движение на другата
+				//balls[1].position.x = 4*Math.cos(2.1*temp);
+				//balls[1].position.y = 0.5+1*Math.cos(2.3*temp);
+				//balls[1].position.z = 4*Math.sin(2.1*temp);;
+
+				// движение и на третата
+				//balls[2].position.x = 4*Math.sin(1.2*temp);
+				//balls[2].position.y = 0.5+1*Math.sin(2.1*temp);
+				//balls[2].position.z = 4*Math.cos(2.1*temp);;
+
+                renderer.render( scene, camera );
+            }
+		</script>
+	</body>
+</html>

@@ -1,0 +1,184 @@
+﻿<html>
+	<head>
+		<style>
+			body { margin: 0; }
+			canvas { width: 100%; height: 100% }
+		</style>
+	</head>
+	<body>
+		<script src="three.min.js"></script>
+		<script>
+			// Задача: опитайте се да замените куба със сфера,
+			// която да е с гладка повърхност
+			
+			var renderer = new THREE.WebGLRenderer();
+			renderer.setSize( window.innerWidth, window.innerHeight );
+			document.body.appendChild( renderer.domElement );
+
+			var scene = new THREE.Scene();
+			
+			var aspect = window.innerWidth/window.innerHeight;
+			var camera = new THREE.PerspectiveCamera( 30, aspect );
+			camera.position.set( 1, 4, 8);
+			camera.lookAt( new THREE.Vector3() );
+
+			// най-долен слой с кафяво
+			var geometry = new THREE.BoxGeometry( 5, 0.1, 6 );
+			var material = new THREE.MeshPhongMaterial({color: "rgb(242, 175, 68)"});
+			var ground1 = new THREE.Mesh( geometry, material );
+			scene.add( ground1 );
+
+			var geometry = new THREE.BoxGeometry( 4.1, 0.04, 6 );
+			var material = new THREE.MeshPhongMaterial({color: "rgb(252, 108, 108)"});
+			var ground2 = new THREE.Mesh( geometry, material );
+			ground2.position.set(0.525,0.1,0.08);
+			scene.add( ground2 );
+
+			var geometry = new THREE.BoxGeometry( 1, 0.04, 6 );
+			var material = new THREE.MeshPhongMaterial({color: "rgb(239, 255, 90)"});
+			var ground3 = new THREE.Mesh( geometry, material );
+			ground3.position.set(-2.02,0.1,0.1 );
+			scene.add( ground3 );
+			
+			var geometry = new THREE.BoxGeometry( 0.15, 0.7, 6 );
+			var material = new THREE.MeshPhongMaterial({color: "rgb(239, 255, 90)"});
+			var wall1 = new THREE.Mesh( geometry, material );
+			wall1.position.set(-1.8,0.5,0.15);
+			scene.add( wall1 );
+
+			var geometry = new THREE.BoxGeometry( 0.1, 0.3, 6 );
+			var material = new THREE.MeshPhongMaterial({color: "rgb(232, 226, 216)"});
+			var wall2 = new THREE.Mesh( geometry, material );
+			wall2.position.set(-1.53,0.22,0.08);
+			scene.add( wall2 );
+
+			var geometry = new THREE.BoxGeometry( 2.1, 0.01, 4 );
+			var material = new THREE.MeshPhongMaterial({color: "rgb(239, 255, 90)"});
+			var tennisGround = new THREE.Mesh( geometry, material );
+			tennisGround.position.set(0.6,0.14,0.3);
+			scene.add( tennisGround);
+
+			var geometry = new THREE.BoxGeometry( 0.05, 0.45, 0.05 );
+			var material = new THREE.MeshPhongMaterial({color: 'lime'});
+			var column1 = new THREE.Mesh( geometry, material );
+			column1.position.set(-0.6,0.3,0.3);
+			scene.add( column1);
+
+			var geometry = new THREE.BoxGeometry( 0.05, 0.45, 0.05 );
+			var material = new THREE.MeshPhongMaterial({color: 'lime'});
+			var column2 = new THREE.Mesh( geometry, material );
+			column2.position.set(1.8,0.3,0.3);
+			scene.add( column2);
+
+			var geometry = new THREE.BoxGeometry( 2.4, 0.4, 0.05 );
+			var material = new THREE.MeshPhongMaterial({color: 'grey'});
+			var tennisWeb = new THREE.Mesh( geometry, material );
+			tennisWeb.position.set(0.6,0.33,0.3);
+			scene.add( tennisWeb);
+
+			var geometry = new THREE.BoxGeometry( 3, 0.3, 0.1 );
+			var material = new THREE.MeshPhongMaterial({color: "rgb(232, 226, 216)"});
+			var wall3 = new THREE.Mesh( geometry, material );
+			wall3.position.set(0.6,0.22,2.9);
+			scene.add( wall3 );
+
+			var geometry = new THREE.BoxGeometry( 4.10, 0.3, 0.1 );
+			var material = new THREE.MeshPhongMaterial({color: "rgb(232, 226, 216)"});
+			var wall4 = new THREE.Mesh( geometry, material );
+			wall4.position.set(0.53,0.22,-2.83);
+			scene.add( wall4 );
+			
+			for(var i = 0; i < 5; i++) {
+				var geometry = new THREE.BoxGeometry(0.05, 1, 0.05);
+				var material = new THREE.MeshPhongMaterial({ color: 'grey' });
+				var columnI = new THREE.Mesh(geometry, material);5
+				columnI.position.set(-1.52 + i*1.02,0.8,-2.85);
+				scene.add(columnI);
+			}
+
+			for(var i = 0; i < 4; i++) {
+				var geometry = new THREE.BoxGeometry(0.95, 0.94, 0.03);
+				var material = new THREE.MeshPhongMaterial({ color: "rgb(255, 221, 153)" });
+				var fence = new THREE.Mesh(geometry, material);
+				fence.position.set(-1.02 + i*1.02,0.8,-2.85);
+				scene.add(fence);
+			} 
+
+			var geometry = new THREE.BoxGeometry( 0.5, 0.1, 1 );
+			var material = new THREE.MeshPhongMaterial({color: 'red'});
+			var flagNorwayRed = new THREE.Mesh( geometry, material );
+			flagNorwayRed.position.set(-1,0.1,1);
+			scene.add( flagNorwayRed);
+			
+			var geometry = new THREE.BoxGeometry( 0.08, 0.11, 1 );
+			var material = new THREE.MeshPhongMaterial({color: 'blue'});
+			var flagNorwayBlue1 = new THREE.Mesh( geometry, material );
+			flagNorwayBlue1.position.set(-1.02,0.1,1);
+			scene.add( flagNorwayBlue1);
+
+			
+			var geometry = new THREE.BoxGeometry( 0.5, 0.11, 0.08 );
+			var material = new THREE.MeshPhongMaterial({color: 'blue'});
+			var flagNorwayBlue2 = new THREE.Mesh( geometry, material );
+			flagNorwayBlue2.position.set(-1,0.1,1.15);
+			scene.add( flagNorwayBlue2);
+
+			var geometry = new THREE.BoxGeometry( 0.08, 0.105, 1  );
+			var material = new THREE.MeshPhongMaterial({color: 'white'});
+			var flagNorwayWhite1 = new THREE.Mesh( geometry, material );
+			flagNorwayWhite1.position.set(-0.99,0.1,1);
+			scene.add( flagNorwayWhite1)
+
+			
+			var geometry = new THREE.BoxGeometry( 0.08, 0.105, 1  );
+			var material = new THREE.MeshPhongMaterial({color: 'white'});
+			var flagNorwayWhite2 = new THREE.Mesh( geometry, material );
+			flagNorwayWhite2.position.set(-1.05,0.1,1);
+			scene.add( flagNorwayWhite2)
+
+			
+			var geometry = new THREE.BoxGeometry( 0.5, 0.105, 0.08 );
+			var material = new THREE.MeshPhongMaterial({color: 'white'});
+			var flagNorwayWhite3 = new THREE.Mesh( geometry, material );
+			flagNorwayWhite3.position.set(-1,0.1,1.2);
+			scene.add( flagNorwayWhite3)
+
+
+			
+			var geometry = new THREE.BoxGeometry( 0.5, 0.105, 0.08 );
+			var material = new THREE.MeshPhongMaterial({color: 'white'});
+			var flagNorwayWhite4 = new THREE.Mesh( geometry, material );
+			flagNorwayWhite4.position.set(-1,0.1,1.1);
+			scene.add( flagNorwayWhite4)
+
+
+			var geometry = new THREE.BoxGeometry( 0.16, 0.1, 1 );
+			var material = new THREE.MeshPhongMaterial({color: 'white'});
+			var flagHungaryRed = new THREE.Mesh( geometry, material );
+			flagHungaryRed.position.set(-1,0.1,-1);
+			scene.add( flagHungaryRed);
+
+			var geometry = new THREE.BoxGeometry( 0.16, 0.1, 1 );
+			var material = new THREE.MeshPhongMaterial({color: 'red'});
+			var flagHungaryRed = new THREE.Mesh( geometry, material );
+			flagHungaryRed.position.set(-1.16,0.1,-1);
+			scene.add( flagHungaryRed);
+
+			var geometry = new THREE.BoxGeometry( 0.16, 0.1, 1 );
+			var material = new THREE.MeshPhongMaterial({color: 'green'});
+			var flagHungaryRed = new THREE.Mesh( geometry, material );
+			flagHungaryRed.position.set(-0.84,0.1,-1);
+			scene.add( flagHungaryRed);
+			
+
+
+
+
+			var light = new THREE.PointLight( );
+			light.position.set( -1, 7, 8 );
+			scene.add( light );
+
+			renderer.render( scene, camera );
+		</script>
+	</body>
+</html>

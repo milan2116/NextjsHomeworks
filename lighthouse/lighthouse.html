@@ -1,0 +1,124 @@
+﻿<html>
+	<head>
+		<style>
+			body { margin: 0; }
+		</style>
+	</head>
+	<body>
+		<script src="three.min.js"></script>
+		<script>
+			var renderer = new THREE.WebGLRenderer();
+			renderer.setSize( window.innerWidth, window.innerHeight );
+			renderer.setAnimationLoop( drawFrame );
+			document.body.appendChild( renderer.domElement );
+
+			var scene = new THREE.Scene();
+			
+			var aspect = window.innerWidth/window.innerHeight;
+			var camera = new THREE.PerspectiveCamera( 30, aspect );
+			camera.position.set( 30, 40, 40 );
+			camera.lookAt( new THREE.Vector3() );
+
+			const geometry1 = new THREE.CylinderGeometry( 3, 2.8, 4, 64 ); 
+			const material1 = new THREE.MeshBasicMaterial( {color: "rgb(207, 197, 196)"} ); 
+			const cylinder1 = new THREE.Mesh( geometry1, material1 ); 
+
+			scene.add(cylinder1);
+
+			const geometry2 = new THREE.CylinderGeometry( 2.8, 2.6, 4, 64 ); 
+			const material2 = new THREE.MeshBasicMaterial( {color: "rgb(163, 21, 8)"} ); 
+			const cylinder2 = new THREE.Mesh( geometry2, material2 );
+			cylinder2.position.set(0,4,0);
+
+			scene.add(cylinder2);
+
+			const geometry3 = new THREE.CylinderGeometry( 2.6, 2.5, 4, 64 ); 
+			const material3 = new THREE.MeshBasicMaterial( {color: "rgb(207, 197, 196)"} ); 
+			const cylinder3 = new THREE.Mesh( geometry3, material3 );
+			cylinder3.position.set(0,8,0);
+
+			scene.add(cylinder3);
+
+
+			const geometry4 = new THREE.CylinderGeometry( 2.5, 2.4, 4, 64 ); 
+			const material4 = new THREE.MeshBasicMaterial( {color: "rgb(163, 21, 8)"} ); 
+			const cylinder4 = new THREE.Mesh( geometry4, material4 );
+			cylinder4.position.set(0,12,0);
+
+			scene.add(cylinder4);
+
+			const geometry5 = new THREE.CylinderGeometry( 0.3, 0.3, 2, 64 ); 
+			const material5 = new THREE.MeshBasicMaterial( {color: "rgb(23, 22, 22)"} ); 
+			const cylinder5 = new THREE.Mesh( geometry5, material5 );
+			cylinder5.position.set(1,15,1);
+
+			scene.add(cylinder5);
+
+			const geometry6 = new THREE.CylinderGeometry( 0.3, 0.3, 2, 64 ); 
+			const material6 = new THREE.MeshBasicMaterial( {color: "rgb(23, 22, 22)"} ); 
+			const cylinder6 = new THREE.Mesh( geometry6, material6 );
+			cylinder6.position.set(-1,15,-1);
+
+			scene.add(cylinder6);
+
+
+			const geometry7 = new THREE.CylinderGeometry( 0.3, 0.3, 2, 64 ); 
+			const material7 = new THREE.MeshBasicMaterial( {color: "rgb(23, 22, 22)"} ); 
+			const cylinder7 = new THREE.Mesh( geometry7, material7 );
+			cylinder7.position.set(1,15,-1);
+
+			scene.add(cylinder7);
+
+			const geometry8 = new THREE.CylinderGeometry( 0.3, 0.3, 2, 64 ); 
+			const material8 = new THREE.MeshBasicMaterial( {color: "rgb(23, 22, 22)"} ); 
+			const cylinder8 = new THREE.Mesh( geometry8, material8 );
+			cylinder8.position.set(-1,15,1);
+
+			scene.add(cylinder8);
+
+			const geometry9 = new THREE.CylinderGeometry( 0, 2, 2, 64 ); 
+			const material9 = new THREE.MeshBasicMaterial( {color: "rgb(207, 197, 196)"} ); 
+			const cylinder9 = new THREE.Mesh( geometry9, material9 );
+			cylinder9.position.set(0,17,0);
+
+			scene.add(cylinder9);
+
+
+			// var pill = new THREE.Group();
+			// scene.add( pill );
+			// var geometry = new THREE.SphereGeometry( 1, 16, 16, 0, 2*Math.PI, 0, Math.PI/2 );
+			// var material = new THREE.MeshPhongMaterial( {color:'red'} );
+			// var cap = new THREE.Mesh( geometry, material );
+			// cap.position.set( 0, 2, 0 );
+			// pill.add( cap );
+			// geometry = new THREE.CylinderGeometry( 1, 1, 2, 16 );
+			// body = new THREE.Mesh( geometry, material );
+			// body.position.set( 0, 1, 0 );
+			// pill.add( body ); 
+
+			// // Жълто долно капаче
+			// geometry = new THREE.SphereGeometry( 1, 16, 16, 0, 2*Math.PI, Math.PI/2, Math.PI/2 );
+			// material = new THREE.MeshPhongMaterial( {color:'yellow'} );
+			// cap = new THREE.Mesh( geometry, material );
+			// cap.position.set( 0, -2, 0 );
+			// pill.add( cap ); 
+			// // Жълто горно тяло
+			// geometry = new THREE.CylinderGeometry( 1, 1, 2, 16 );
+			// body = new THREE.Mesh( geometry, material );
+			// body.position.set( 0, -1, 0 );
+			// pill.add( body ); 
+			
+			// // Светлина
+			// var light = new THREE.PointLight();
+			// light.position.set( 0, 0, 20 );
+			// scene.add( light ); // е, тя е към сцената
+			
+			function drawFrame()
+			{
+				// pill.rotation.x += 0.005;
+				// pill.rotation.z += 0.005;
+				renderer.render( scene, camera );
+			}
+		</script>
+	</body>
+</html>
